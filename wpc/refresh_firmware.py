@@ -1,13 +1,7 @@
 from cloudfiles.errors import NoSuchObject
 
-__copyright__ = """
-Copyright (c) 2013 CradlePoint, Inc. <www.cradlepoint.com>.
-All rights reserved.
 
-This file contains confidential information of CradlePoint, Inc. and your
-use of this file is subject to the CradlePoint Software License Agreement
-distributed with this file. Unauthorized reproduction or distribution of
-this file is subject to civil and criminal penalties. """
+
 
 import os
 import requests
