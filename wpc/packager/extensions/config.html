@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!-- ECM Merged 8/18/2016 -->
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    <link rel="icon" href="resources/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="resources/all_css.cgz">
+    <title>Admin</title>
+	<script type="application/javascript">
+		cp = window.cp || {};
+		cp.ecm = cp.ecm || {};
+		cp.ecm.enabled = true;
+
+        // Get an argument from the URL
+        cp.ecm.getUrlArg = function( argName ) {
+            var regexS = "[\\?&]" + argName + "=([^&#]*)";
+            var regex = new RegExp( regexS );
+            var results = regex.exec( window.location.href );
+            if ( results === null ) {
+                return "";
+            } else {
+                return results[1];
+            }
+        };
+
+        // Get the context (Group or Router?)
+        cp.ecm.editorContext = cp.ecm.getUrlArg('editorContext');
+
+        // Set device mode
+        cp.ecm.device_mode = cp.ecm.editorContext === 'routers';
+
+
+		cp.force_auth = function(from) {
+            var url = '/login/?';
+
+			if (from === 'server' || from === 'timeout') {
+                url += 'error=session_closed';
+			} else {
+                url += 'op=user_logout';
+			}
+
+			window.location.replace(url);
+		};
+
+		cp.logout = function(why) {
+			document.cookie = 'user=; expires=Mon, 1 Jan 1970 00:00:01 UTC; path=/';
+			cp.force_auth((why) ? why : 'client');
+		};
+		cp.ui_activated = "True";
+		cp.client_mac = "00:00:00:00:00:00";
+		cp.pci_dss_mode = false;
+		cp.session_timeout = 0;
+		cp.idle_timeout = 3600;
+		cp.features = [];
+	</script>
+    <script type="application/javascript" src="ext-all.jgz"></script>
+    <script type="application/javascript" src="sencha-charts.jgz"></script>
+	<script type="application/javascript" src="shared.jgz"></script>
+	<script type="application/javascript" src="admin.jgz"></script>
+</head>
+<body></body>
+</html>
